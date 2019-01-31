@@ -9,7 +9,7 @@ import 'package:english_words/english_words.dart';
 
 void main() {
   runApp(new MaterialApp(
-    title: 'Flutter Tutorial',
+//    title: 'Flutter Tutorial',
     home: new MyApp(),
   ));
 }
@@ -42,14 +42,6 @@ class _StartFrameState extends State<StartFrame>
     with SingleTickerProviderStateMixin {
   TabController tabController;
 
-//  @override
-//  void initState() {
-//    super.initState();
-//    // ignore: argument_type_not_assignable
-////    tabController = new TabController(initialIndex: 0, length: 3, vsync: this);
-//
-//  }
-
   @override
   void initState() {
     super.initState();
@@ -59,14 +51,14 @@ class _StartFrameState extends State<StartFrame>
 
   @override
   void dispose() {
-    tabController.dispose();
     super.dispose();
+    tabController.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-//      appBar: new AppBar(title: new Text("主页"), backgroundColor: Colors.teal),
+//      appBar: new AppBar(title: new Text("全局主页"), backgroundColor: Colors.teal),
 //      floatingActionButton: new FloatingActionButton(
 //        onPressed: null,
 //      backgroundColor: Colors.teal,
