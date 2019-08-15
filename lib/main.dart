@@ -1,9 +1,8 @@
-import 'package:firstflutter/RandomWords.dart';
 import 'package:firstflutter/else/ElsePage.dart';
 import 'package:firstflutter/home/HomePage.dart';
 import 'package:firstflutter/api/FlutterApiPage.dart';
-import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
+import 'package:flutter/material.dart';
 
 //void main() => runApp(new MyApp());
 
@@ -41,12 +40,14 @@ class StartFrame extends StatefulWidget {
 class _StartFrameState extends State<StartFrame>
     with SingleTickerProviderStateMixin {
   TabController tabController;
+  int _currentItem = 0;
+  final List<BottomNavigationBarItem> mList = [];
 
   @override
   void initState() {
     super.initState();
     tabController = new TabController(
-        initialIndex: 0, vsync: this, length: 4); // 这里的length 决定有多少个底导 submenus
+        initialIndex: 0, vsync: this, length: 3); // 这里的length 决定有多少个底导 submenus
   }
 
   @override
@@ -58,11 +59,6 @@ class _StartFrameState extends State<StartFrame>
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-//      appBar: new AppBar(title: new Text("全局主页"), backgroundColor: Colors.teal),
-//      floatingActionButton: new FloatingActionButton(
-//        onPressed: null,
-//      backgroundColor: Colors.teal,
-//      ),
       body: new TabBarView(controller: tabController, children: <Widget>[
         new HomePage(),
         new FlutterApiPage(),
@@ -71,8 +67,11 @@ class _StartFrameState extends State<StartFrame>
       bottomNavigationBar: Material(
         color: const Color(0xFFF0EEEF), //底部导航栏主题颜色
         child: SafeArea(
+//          minimum: EdgeInsets.all(3),
           child: Container(
-            height: 60.0,
+            height: 55.0,
+//            padding: EdgeInsets.fromLTRB(0, 2, 0, 1),
+//            margin: EdgeInsets.fromLTRB(0, 5, 0, 5),
             decoration: BoxDecoration(
               color: const Color(0xFFF0F0F0),
               boxShadow: <BoxShadow>[
@@ -86,16 +85,15 @@ class _StartFrameState extends State<StartFrame>
             ),
             child: TabBar(
               controller: tabController,
-              indicatorColor: Colors.teal,
-              //tab标签的下划线颜色
+              indicatorColor: Colors.transparent,
               // labelColor: const Color(0xFF000000),
               indicatorWeight: 2.0,
               labelColor: Colors.teal,
               unselectedLabelColor: const Color(0xFF8E8E8E),
               tabs: <Tab>[
-                Tab(text: '主页', icon: Icon(Icons.android)),
+                Tab(text: 'Home', icon: Icon(Icons.time_to_leave)),
                 Tab(text: 'Flutter', icon: Icon(Icons.extension)),
-                Tab(text: '其他', icon: Icon(Icons.create)),
+                Tab(text: 'Else', icon: Icon(Icons.create)),
               ],
             ),
           ),
