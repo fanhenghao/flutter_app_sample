@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 
-class TabBarPage extends StatelessWidget {
+class TabBarPage extends StatefulWidget {
   String itemTitle;
 
   TabBarPage({Key key, @required this.itemTitle}) : super(key: key);
+
+  @override
+  TabBarPageState createState() => TabBarPageState();
+}
+
+class TabBarPageState extends State<TabBarPage> {
+  bool _choiceBg = false;
 
   @override
   Widget build(BuildContext context) {
@@ -12,13 +19,28 @@ class TabBarPage extends StatelessWidget {
         length: _item.length,
         child: Scaffold(
           appBar: AppBar(
-            title: Text("TabBarPage"),
+            title: Text(widget.itemTitle),
             backgroundColor: Colors.black54,
+            actions: <Widget>[
+              IconButton(
+                icon: Icon(
+                  Icons.tag_faces,
+                  color: Colors.teal,
+                ),
+                onPressed: () {
+//                  Toast.show("切换选中背景", context);
+                  setState(() {
+                    _choiceBg = !_choiceBg;
+                  });
+                },
+              ),
+            ],
             bottom: TabBar(
               isScrollable: true,
               labelColor: Colors.teal,
               unselectedLabelColor: Colors.white,
               indicatorColor: Colors.teal,
+              indicator: bgIndicator(),
               tabs: _item.map<Widget>((TabBarChoice choice) {
                 return Tab(
                   text: choice.text,
@@ -53,6 +75,17 @@ class TabBarPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Decoration bgIndicator() {
+    if (!_choiceBg) {
+      return const UnderlineTabIndicator();
+    }
+    return ShapeDecoration(
+        shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(Radius.circular(8.0)),
+      side: BorderSide(color: Colors.white12, width: 2),
+    ));
   }
 }
 
